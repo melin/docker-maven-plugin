@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<component-set>
+  <components>
+    <component>
+      <role>com.iflytek.edu.docker.maven.assembly.DockerArchiveCreator</role>
+      <implementation>com.iflytek.edu.docker.maven.assembly.DockerArchiveCreator</implementation>
+      <instantiation-strategy>per-lookup</instantiation-strategy>
+    </component>
+  </components>
+</component-set>
