@@ -39,6 +39,9 @@ public class BuildDataImageMojo extends AbstractDockerMojo {
     private String command;
     
     @Parameter
+    private boolean forceRemoveExistImage = false;
+    
+    @Parameter
     protected String assemblyDescriptor;
 
     @Parameter
@@ -77,12 +80,24 @@ public class BuildDataImageMojo extends AbstractDockerMojo {
     }
 
     protected String createImage(DockerAccess dockerAccess) throws MojoExecutionException, MojoFailureException {
+    	boolean existImage = dockerAccess.hasImage(image);
+    	
+    	if(existImage) {
+    		if(forceRemoveExistImage) {
+    			dockerAccess.removeImage(image);
+    		} else {
+    			throw new MojoExecutionException("Image: " + image + " has been stored, please delete");
+    		}
+    	}
+    	
         if (assemblyDescriptor != null && assemblyDescriptorRef != null) {
             throw new MojoExecutionException("No assemblyDescriptor or assemblyDescriptorRef has been given");
         }
 
         return buildImage(dockerAccess);
     }
+    
+    
     protected String getImageName() {
         String name = image != null ?
         		image :

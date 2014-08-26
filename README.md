@@ -9,12 +9,13 @@
   		<baseImage>melin/cloud-server:latest</baseImage>
   		<url>http://192.168.68.133:2375</url>
   		<image>melin/${project.artifactId}:${project.version}</image>
-			<dataExportDir>/${project.artifactId}</dataExportDir>
-			<assemblyDescriptor>src/main/assembly/assembly.xml</assemblyDescriptor>
-			<runs>
-				<run>chmod +x /${project.artifactId}/bin/server.sh</run>
-			</runs>
-			<command>/${project.artifactId}/bin/server.sh start</command>
+		<dataExportDir>/${project.artifactId}</dataExportDir>
+		<assemblyDescriptor>src/main/assembly/assembly.xml</assemblyDescriptor>
+		<forceRemoveExistImage>true</forceRemoveExistImage>
+		<runs>
+			<run>chmod +x /${project.artifactId}/bin/server.sh</run>
+		</runs>
+		<command>/${project.artifactId}/bin/server.sh start</command>
   	</configuration>
 </plugin>
 ```
